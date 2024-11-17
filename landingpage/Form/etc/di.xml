@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="LandingPage\Form\Api\FormDataRepositoryInterface" type="LandingPage\Form\Model\FormDataRepository" />
+    <preference for="LandingPage\Form\Api\FormDataInterface" type="LandingPage\Form\Model\FormData" />
+    <preference for="LandingPage\Form\Api\Data\FormDataInterface" type="LandingPage\Form\Model\FormData" />
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="LandingPage\Form\Api\Data\FormDataInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">landingpage_form</item>
+                    <item name="identifierField" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="LandingPage\Form\Controller\Index\Index"> 
+        <plugin name="landingpage_redirect_based_on_route" type="LandingPage\Form\Plugin\FormRedirectPlugin" />
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="landingpage_grid_listing_data_source" xsi:type="string">LandingPage\Form\Model\ResourceModel\FormData\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+<type name="LandingPage\Form\Block\Adminhtml\Grid\Edit\Form">
+    <arguments>
+        <argument name="userCollectionFactory" xsi:type="object">Magento\User\Model\ResourceModel\User\CollectionFactory</argument>
+    </arguments>
+</type>
+     <virtualType name="LandingPage\Form\Model\ResourceModel\FormData\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">landingpage_form</argument>
+            <argument name="resourceModel" xsi:type="string">LandingPage\Form\Model\ResourceModel\FormData</argument>
+        </arguments>
+    </virtualType>
+
+<!--EAV REGISTER TABLE ENTITY ID-->
+
+
+
+    <type name="Magento\Eav\Model\EntityFactory">
+        <arguments>
+            <argument name="entity" xsi:type="array">
+                <item name="landingpage_form_data" xsi:type="array">
+                    <item name="model" xsi:type="string">LandingPage\Form\Model\FormData</item>
+                    <item name="table" xsi:type="string">landingpage_form</item> <!-- Nazwa tabeli -->
+                    <item name="identifierField" xsi:type="string">id</item> <!-- Pole identyfikujące encję -->
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+
+
+  
+
+</config>

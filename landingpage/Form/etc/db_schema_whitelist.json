@@ -1,0 +1,15 @@
+{
+    "eav_entity_type": {
+        "entity_type_code": "string",
+        "entity_model": "string",
+        "entity_table": "string",
+        "entity_id_field": "string",
+        "is_data_sharing": "int",
+        "data_sharing_key": "string",
+        "default_attribute_set_id": "int",
+        "increment_model": "string",
+        "increment_per_store": "int",
+        "increment_pad_length": "int",
+        "increment_pad_char": "string"
+    }
+}
